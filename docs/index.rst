@@ -6,11 +6,14 @@
 Welcome to fprl's documentation!
 =========================================================
 
+fprl is a library for implementing logs per flask request.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    autodoc
+   examples
 
 
 
