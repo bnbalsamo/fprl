@@ -1,5 +1,6 @@
 import unittest
 from logging import Logger
+from unittest import mock
 
 from flask import Flask, request
 
@@ -51,6 +52,30 @@ class Tests(unittest.TestCase):
         self.assertIsInstance(first_logger, Logger)
         self.assertIsInstance(second_logger, Logger)
         self.assertNotEqual(first_logger, second_logger)
+
+    def testInjectLoggerCalled(self):
+        # We can't use the "standard" app provided via
+        # setUp here because we need to register the fprl
+        # callback _after_ mocking the function.
+        app = Flask("test_app")
+
+        @app.route("/")
+        def hi():
+            request.logger.info("hi!")
+            return "Hello World!"
+
+        with mock.patch("fprl.inject_logger") as m:
+            app.before_request(fprl.inject_logger)
+            with app.test_request_context("/"):
+                app.preprocess_request()
+            m.assert_called()
+
+    def testBuildLoggerCalled(self):
+        with mock.patch("fprl.build_logger") as m:
+            self.app.before_request(fprl.inject_logger)
+            with self.app.test_request_context("/"):
+                self.app.preprocess_request()
+            m.assert_called()
 
 
 if __name__ == "__main__":
