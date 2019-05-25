@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 # Provided Package Metadata
 NAME = "fprl"
-DESCRIPTION = "A middleware for implementing logs per flask request."
+DESCRIPTION = "A library for implementing logs per flask request."
 VERSION = "0.0.1"
 AUTHOR = "Brian Balsamo"
 AUTHOR_EMAIL = "Brian@BrianBalsamo.com"
