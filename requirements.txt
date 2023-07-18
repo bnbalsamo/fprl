@@ -1,5 +1,5 @@
 # Pinned on 2019-05-25
-Click==7.0
+Click==8.1.6
 Flask==1.0.3
 itsdangerous==1.1.0
 Jinja2==2.10.1
